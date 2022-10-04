@@ -60,27 +60,21 @@
       *    Nro producto        numerico  de 5
       *    Cantidad        numérico de 6
        
-       02  WSV-COMPRA.
+       01  WSV-REGCOMPRA.
+           05 WSV-NRO-CLTE     PIC 9(4).
+           05 WSV-NRO-PRODUCTO PIC 9(5).
+           05 WSV-CANTIDAD     PIC 9(6).
 
       *    Archivo PRODUCTO   (Indice por Nro Producto)
       *    REGISTROP   NIVEL 01        REGPDCTO
       *    Nro Producto        numérico de 4
       *    Nombre producto    alfa numérico de 20
       *    Valor x unidad        numérico  de 6, con 2 decimales
-
+       01  WSV-REGPRODUCTO.
+           05 WSV-NRO-PRODUCTO PIC 9(4).
+           05 WSV-NOMBRE       PIC X(20).
+           05 WSV-VALOR-UNIDAD PIC 9(6)V9(2).
       *-----------------------
        PROCEDURE DIVISION.
-
-       0000-CUERPO-DEL-PROG.
-
-           PERFORM 1000-ENTRAR-ALUMNO
-
-           PERFORM 2000-MOSTRAR
-
-           STOP RUN.
-
-       1000-ENTRAR-ALUMNO.
-           DISPLAY 'QUIEN VA A ESTUDIAR ? '
-           ACCEPT  WSV-ALUMNO .
-       2000-MOSTRAR.
-           DISPLAY  '                  Bienvenido al curso ' WSV-ALUMNO.
+           DISPLAY "HELLO WORLD".
+           
