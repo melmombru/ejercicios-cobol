@@ -5,7 +5,7 @@
       ******************************************************************
        IDENTIFICATION DIVISION.
       *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-       PROGRAM-ID. EJE40M1.
+       PROGRAM-ID. FECHA002.
        ENVIRONMENT DIVISION.
       *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
        CONFIGURATION SECTION.
@@ -53,53 +53,34 @@
                SET DIA-OK TO TRUE
            ELSE
                SET DIA-INIC TO TRUE
-           END-IF
-           PERFORM UNTIL DIA-OK
                DISPLAY 'INGRESE EL DIA NUEVAMENTE (en formato dd):'
                ACCEPT DIA 
-               IF DIA >= 1 AND DIA <= 31
-                   SET DIA-OK TO TRUE
-               ELSE
-                   SET DIA-INIC TO TRUE
-               END-IF  
-           END-PERFORM.
+           END-IF.
 
        VALIDAR-FECHA-MES.
            IF MES >= 1 AND MES <= 12
                SET MES-OK TO TRUE
            ELSE
                SET MES-INIC TO TRUE
-           END-IF
-           PERFORM UNTIL MES-OK
                DISPLAY 'INGRESE EL MES NUEVAMENTE (en formato mm):'
-               ACCEPT MES 
-               IF MES >= 1 AND MES <= 12
-                   SET MES-OK TO TRUE
-               ELSE
-                   SET MES-INIC TO TRUE
-               END-IF   
-           END-PERFORM.
+               ACCEPT MES
+           END-IF.
        
        VALIDAR-FECHA-ANIO.
            IF ANIO >= 1990 AND ANIO <= 2040
                SET ANIO-OK TO TRUE
            ELSE
                SET ANIO-INIC TO TRUE
-           END-IF
-           PERFORM UNTIL ANIO-OK
                DISPLAY 'INGRESE EL ANIO NUEVAMENTE (en formato aaaa):'
-               ACCEPT ANIO 
-               IF ANIO >= 1990 AND ANIO <= 2040
-                   SET ANIO-OK TO TRUE
-               ELSE
-                   SET ANIO-INIC TO TRUE
-               END-IF    
-           END-PERFORM.
+               ACCEPT ANIO
+           END-IF.
       
        VALIDAR-FECHA.
-           PERFORM VALIDAR-FECHA-DIA
-           PERFORM VALIDAR-FECHA-MES
-           PERFORM VALIDAR-FECHA-ANIO.
+           PERFORM UNTIL (DIA-OK AND MES-OK AND ANIO-OK)
+               PERFORM VALIDAR-FECHA-DIA
+               PERFORM VALIDAR-FECHA-MES
+               PERFORM VALIDAR-FECHA-ANIO  
+           END-PERFORM.
 
        FIN-DEL-PROGRAMA.
            STOP RUN.
