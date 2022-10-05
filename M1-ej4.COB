@@ -44,7 +44,6 @@
        INGRESO-DE-FECHA.
            DISPLAY 'INGRESE LA FECHA (en formato ddmmaaaa):'
            ACCEPT FECHA
-           DISPLAY FECHA
            PERFORM VALIDAR-FECHA.   
 
        MUESTRA-FECHA.
