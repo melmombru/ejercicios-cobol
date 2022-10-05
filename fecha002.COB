@@ -1,7 +1,7 @@
       ******************************************************************
       * Author: Melanie
       * Date: 2022 10
-      * DESCRIPCION: Ejercicio M1-3
+      * DESCRIPCION: Ejercicio M1-3 Version 2
       ******************************************************************
        IDENTIFICATION DIVISION.
       *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
@@ -76,6 +76,9 @@
            END-IF.
       
        VALIDAR-FECHA.
+           SET DIA-INIC TO TRUE
+           SET MES-INIC TO TRUE
+           SET ANIO-INIC TO TRUE    
            PERFORM UNTIL (DIA-OK AND MES-OK AND ANIO-OK)
                PERFORM VALIDAR-FECHA-DIA
                PERFORM VALIDAR-FECHA-MES
