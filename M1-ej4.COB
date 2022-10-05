@@ -23,14 +23,13 @@
            05 MES         PIC 9(2).
            05 ANIO        PIC 9(4).
 
-       01  WSS-FECHA.
-           05 WSS-DIA         PIC X(2).
+       01  WSS-DIA         PIC X(2).
                88 DIA-OK       VALUE 'OK'.
                88 DIA-INIC    VALUE 'IN'.
-           05 WSS-MES         PIC X(2).
+       01  WSS-MES         PIC X(2).
                88 MES-OK       VALUE 'OK'.
                88 MES-INIC    VALUE 'IN'.
-           05 WSS-ANIO        PIC X(4).
+       01  WSS-ANIO        PIC X(4).
                88 ANIO-OK      VALUE 'OK'.
                88 ANIO-INIC   VALUE 'IN'.
       *-----------------------
