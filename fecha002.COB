@@ -1,7 +1,7 @@
       ******************************************************************
       * Author: Melanie
       * Date: 2022 10
-      * DESCRIPCION: Ejercicio M1-3 Version 2
+      * DESCRIPCION: Ejercicio M1-4 Version 2
       ******************************************************************
        IDENTIFICATION DIVISION.
       *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
@@ -19,19 +19,19 @@
       *-----------------------
        WORKING-STORAGE SECTION.
        01  FECHA.
-           05 DIA         PIC 9(2).
-           05 MES         PIC 9(2).
-           05 ANIO        PIC 9(4).
+           05 DIA          PIC 9(2).
+           05 MES          PIC 9(2).
+           05 ANIO         PIC 9(4).
 
        01  WSS-DIA         PIC X(2).
                88 DIA-OK       VALUE 'OK'.
-               88 DIA-INIC    VALUE 'IN'.
+               88 DIA-INIC     VALUE 'IN'.
        01  WSS-MES         PIC X(2).
                88 MES-OK       VALUE 'OK'.
-               88 MES-INIC    VALUE 'IN'.
+               88 MES-INIC     VALUE 'IN'.
        01  WSS-ANIO        PIC X(4).
                88 ANIO-OK      VALUE 'OK'.
-               88 ANIO-INIC   VALUE 'IN'.
+               88 ANIO-INIC    VALUE 'IN'.
       *-----------------------
        PROCEDURE DIVISION.
        00000-CONTROL.
