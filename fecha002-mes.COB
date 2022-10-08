@@ -5,7 +5,7 @@
       ******************************************************************
        IDENTIFICATION DIVISION.
       *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-       PROGRAM-ID. WSV-FECHA002.
+       PROGRAM-ID. FECHA002.
        ENVIRONMENT DIVISION.
       *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
        CONFIGURATION SECTION.
@@ -38,7 +38,7 @@
            05 FILLER       PIC X(10) VALUE 'DICIEMBRE '.
 
        01  WST-MESES REDEFINES WSV-MESES.
-           05 WST-MES      PIX X(10) OCCURS 12.
+           05 WST-MES      PIC X(10) OCCURS 12 TIMES.
 
        01  WSS-WSV-DIA         PIC X(2).
                88 WSS-DIA-OK       VALUE 'OK'.
@@ -57,13 +57,13 @@
            PERFORM FIN-DEL-PROGRAMA.
            
 
-       INGRESO-DE-WSV-FECHA.
+       INGRESO-DE-FECHA.
            DISPLAY 'INGRESE LA FECHA (en formato ddmmaaaa):'
            ACCEPT WSV-FECHA
            PERFORM VALIDAR-FECHA.   
 
        MUESTRA-FECHA.
-           DISPLAY 'FECHA INGRESADA: ' WSV-FECHA.
+           DISPLAY 'FECHA INGRESADA: ' WSV-FECHA WST-MES(WSV-MES).
        
        VALIDAR-FECHA-DIA.
            IF WSV-DIA >= 1 AND WSV-DIA <= 31
@@ -88,15 +88,16 @@
                SET WSS-ANIO-OK TO TRUE
            ELSE
                SET WSS-ANIO-INIC TO TRUE
-               DISPLAY 'INGRESE EL WSV-ANIO NUEVAMENTE (en formato aaaa):'
+               DISPLAY 'INGRESE EL WSV-ANIO NUEVAMENTE' 
+                       '(en formato aaaa):'
                ACCEPT WSV-ANIO
            END-IF.
       
        VALIDAR-FECHA.
-           SET DIA-INIC TO TRUE
+           SET WSS-DIA-INIC TO TRUE
            SET WSS-MES-INIC TO TRUE
            SET WSS-ANIO-INIC TO TRUE    
-           PERFORM UNTIL (WSS-DIA-OK AND WSS- AND ANIO-OK)
+           PERFORM UNTIL (WSS-DIA-OK AND WSS-MES-OK AND WSS-ANIO-OK)
                PERFORM VALIDAR-FECHA-DIA
                PERFORM VALIDAR-FECHA-MES
                PERFORM VALIDAR-FECHA-ANIO  
