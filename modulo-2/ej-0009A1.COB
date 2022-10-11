@@ -34,6 +34,8 @@
 
        01  WST-MESES REDEFINES WSV-MESES.
            05 WST-MES      PIC X(10) OCCURS 12.
+
+       77  WSV-NUM         PIC 9(2).
       *-----------------------
        PROCEDURE DIVISION.
        00000-CONTROL.
@@ -41,7 +43,9 @@
            PERFORM FIN-DEL-PROGRAMA.
            
        MUESTRA-MESES.
-           DISPLAY WST-MESES.
+           PERFORM VARYING WSV-NUM FROM 1 BY 1 UNTIL WSV-NUM > 12
+               DISPLAY WST-MES(WSV-NUM)
+           END-PERFORM.
 
        FIN-DEL-PROGRAMA.
            STOP RUN.
