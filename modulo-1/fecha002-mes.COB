@@ -38,7 +38,7 @@
            05 FILLER       PIC X(10) VALUE 'DICIEMBRE '.
 
        01  WST-MESES REDEFINES WSV-MESES.
-           05 WST-MES      PIC X(10) OCCURS 12 TIMES.
+           05 WST-MES      PIC X(10) OCCURS 12.
 
        01  WSS-WSV-DIA         PIC X(2).
                88 WSS-DIA-OK       VALUE 'OK'.
