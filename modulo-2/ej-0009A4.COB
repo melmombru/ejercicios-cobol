@@ -159,8 +159,11 @@
            DISPLAY "        VALIDAR SUMAS          "
            DISPLAY "-------------------------------"
            IF WSV-TOTAL-COLUMNA-5 = WSV-TOTAL-FILA-13
+               DISPLAY "TOTALES IGUALES"
                MOVE WSV-TOTAL-FILA-13 TO 
                WST-GASTOS(WSC-DIM-FILA, WSC-DIM-COL)
+           ELSE
+               DISPLAY "TOTALES DISTINTOS"
            END-IF
            PERFORM PROCESO-MOSTRAR-MATRIZ.
 
