@@ -92,7 +92,6 @@
                    END-PERFORM
                    COMPUTE WSV-FILA = WSV-FILA + 1
                    SET WSV-AUX TO 2
-                   DISPLAY WST-VECTOR-ESPIRAL
       *        WHEN 2
                    PERFORM VARYING I FROM WSV-FILA BY 1 
                    UNTIL I > WSV-COL
@@ -101,7 +100,6 @@
                    END-PERFORM
                    COMPUTE WSV-RIGHT = WSV-RIGHT - 1
                    SET WSV-AUX TO 3
-                   DISPLAY WST-VECTOR-ESPIRAL
       *        WHEN 3
                    MOVE WSV-RIGHT TO I
                    PERFORM UNTIL I > WSV-COL
@@ -119,7 +117,6 @@
                    END-PERFORM
                    COMPUTE WSV-LEFT = WSV-LEFT - 1
                    SET WSV-AUX TO 1
-                   DISPLAY WST-VECTOR-ESPIRAL
            DISPLAY WST-VECTOR-ESPIRAL
            MOVE WST-VECTOR-ESPIRAL TO WST-MATRIZ-ESPIRAL.
        
