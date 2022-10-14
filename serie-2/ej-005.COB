@@ -27,8 +27,7 @@
        01  WSV-CONTADORES.
            05 I                PIC 9(02).
 
-       01  WSC-DIMENSIONES.
-           05  WSC-DIM    PIC 9(02) VALUE 10.
+       01  WSC-DIM    PIC 9(02) VALUE 10.
       *-----------------------
        PROCEDURE DIVISION.
        00000-CONTROL.
