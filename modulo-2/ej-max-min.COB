@@ -24,14 +24,15 @@
 
        01  WSV-INDICES.         
            05 WSV-I                PIC 9(02).
+           05 WSV-J                PIC 9(02).
 
        01  WSC-DIMENSION           PIC 9(02) VALUE 10.
 
        77  WSV-AUX                 PIC 9(05).
        77  WSV-ENTRADA             PIC 9(02).
-       77  WSV-CONTADOR-1          PIC 9(02).
+       77  WSV-CONTADOR          PIC 9(02).
        77  WSV-CONTADOR-2          PIC 9(02).
-       77  WSV-ACUMULADOR-1        PIC 9(02).
+       77  WSV-ACUMULADOR        PIC 9(02).
        77  WSV-ACUMULADOR-2        PIC 9(02).
        77  WSV-PROMEDIO            PIC 9(02).
        77  WSC-MAX                 PIC 9(02) VALUE 99. 
@@ -47,12 +48,12 @@
            PERFORM FIN-DEL-PROGRAMA.
 
        INGRESO-DE-DATOS.
-      *    MOVE 090807060504030201 TO WST-MATRIZ.
-           PERFORM VARYING WSV-I FROM 1 BY 1 UNTIL WSV-I > WSC-DIMENSION
-               DISPLAY "INGRESE DATO PARA ELEMENTO " WSV-I
-               ACCEPT WSV-ENTRADA
-               MOVE WSV-ENTRADA TO WST-VALOR(WSV-I)
-           END-PERFORM. 
+           MOVE 05050505050505050505 TO WST-TABLA.
+      *    PERFORM VARYING WSV-I FROM 1 BY 1 UNTIL WSV-I > WSC-DIMENSION
+      *        DISPLAY "INGRESE DATO PARA ELEMENTO " WSV-I
+      *        ACCEPT WSV-ENTRADA
+      *        MOVE WSV-ENTRADA TO WST-VALOR(WSV-I)
+      *    END-PERFORM. 
 
       *MUESTRA POR PANTALLA LA MATRIZ      
        PROCESO-MOSTRAR-MATRIZ.
@@ -82,22 +83,20 @@
            DISPLAY "MINIMO: " WSV-AUX.
 
        PROCESO-PROMEDIO.
-           MOVE ZEROES TO WSV-ACUMULADOR-1
-           MOVE ZEROES TO WSV-PROMEDIO
-           MOVE ZEROES TO WSV-CONTADOR-1
-           PERFORM VARYING WSV-I FROM 1 BY 1 UNTIL WSV-I > WSC-DIMENSION
-               IF WSV-I <= 5 
-                   ADD WST-VALOR(WSV-I) TO WSV-ACUMULADOR-1
-                   ADD 1 TO WSV-CONTADOR-1
-               ELSE
-                   ADD WST-VALOR(WSV-I) TO WSV-ACUMULADOR-2
-                   ADD 1 TO WSV-CONTADOR-2
-               END-IF
-           END-PERFORM
-           COMPUTE WSV-PROMEDIO = WSV-ACUMULADOR-1 / WSV-CONTADOR-1
-           DISPLAY "PROMEDIO: " WSV-PROMEDIO
-           COMPUTE WSV-PROMEDIO = WSV-ACUMULADOR-2 / WSV-CONTADOR-2
-           DISPLAY "PROMEDIO: " WSV-PROMEDIO.
+           ADD 1 TO WSV-J
+           PERFORM VARYING WSV-I FROM 1 BY 1 UNTIL WSV-I > 2
+               MOVE ZEROES TO WSV-ACUMULADOR
+               MOVE ZEROES TO WSV-PROMEDIO
+               PERFORM VARYING WSV-CONTADOR FROM 1 BY 1 
+               UNTIL WSV-CONTADOR > 5
+                   ADD WST-VALOR(WSV-J) TO WSV-ACUMULADOR
+                   ADD 1 TO WSV-J
+               END-PERFORM
+               DISPLAY WSV-J " " WSV-ACUMULADOR
+               COMPUTE WSV-PROMEDIO = WSV-ACUMULADOR /(WSV-CONTADOR - 1)
+               DISPLAY "PROMEDIO: " WSV-PROMEDIO
+
+           END-PERFORM.
            
        FIN-DEL-PROGRAMA.
            STOP RUN.
