@@ -92,7 +92,6 @@
                    ADD WST-VALOR(WSV-J) TO WSV-ACUMULADOR
                    ADD 1 TO WSV-J
                END-PERFORM
-               DISPLAY WSV-J " " WSV-ACUMULADOR
                COMPUTE WSV-PROMEDIO = WSV-ACUMULADOR /(WSV-CONTADOR - 1)
                DISPLAY "PROMEDIO: " WSV-PROMEDIO
 
