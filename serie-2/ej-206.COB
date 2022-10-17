@@ -23,7 +23,7 @@
            05 WSV-APELLIDO     PIC X(8).
            05 WSV-DNI          PIC X(10).
            05 WSV-TELEFONO     PIC X(11).
-           05 WSV-DIRECCION    PIC X(10).
+           05 WSV-DIRECCION    PIC X(20).
            05 WSV-ESTADO-CIVIL PIC X(01).
                88 WSS-CASADO       VALUE "C".
                88 WSS-SOLTERO      VALUE "S".
