@@ -28,7 +28,7 @@
 
        FD ENTRADA.
        01 REG-ENTRADA.
-           05 LINEA-MATRIZ     PIC X(30).
+           05 LINEA-REGISTRO     PIC X(30).
       *-----------------------
        WORKING-STORAGE SECTION.
        01 WSS-FS-ENTRADA           PIC X(02).
@@ -62,7 +62,7 @@
        15000-LEER-Y-CARGAR.
            READ ENTRADA
            IF WSS-FS-ENTRADA-OK
-               DISPLAY LINEA-MATRIZ
+               DISPLAY LINEA-REGISTRO
                ADD 1 TO WSV-CONT-ENTRADA
            END-IF.
 
