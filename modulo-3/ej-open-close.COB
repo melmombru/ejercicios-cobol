@@ -51,6 +51,7 @@
            IF NOT WSS-FS-ENTRADA-OK
                DISPLAY 'ERROR DE ARCHIVO DE ENTRADA'
                DISPLAY 'FILE STATUS' WSS-FS-ENTRADA
+               PERFORM FIN-DEL-PROGRAMA
            END-IF.
        
        30000-CERRAR-ARCHIVO.
