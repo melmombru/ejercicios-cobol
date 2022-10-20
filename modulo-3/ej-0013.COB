@@ -3,14 +3,12 @@
       * Date: 2022 10
       * DESCRIPCION: 
 
-      *Ejercicio 2     
-
-      *Archiv  Factura  (Secuencial -Salida impresa)  
+      *Ejercicio 0013 escritura indexado
 
       ******************************************************************
        IDENTIFICATION DIVISION.
       *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-       PROGRAM-ID. EJE011D1.
+       PROGRAM-ID. EJE013.
        ENVIRONMENT DIVISION.
       *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
        CONFIGURATION SECTION.
@@ -18,55 +16,77 @@
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
 
-       SELECT ENTRADA          ASSIGN TO DISK './DatosDePersonas.dat'
+       SELECT SALIDA1          ASSIGN TO DISK './DatosDePersonas.dat'
                                ORGANIZATION IS INDEXED
+                               ACCESS MODE IS RANDOM
                                RECORD KEY IS REG-CLAVE
-                               FILE STATUS IS WSS-FS-ENTRADA.
+                               FILE STATUS IS WSS-FS-SALIDA.
                        
       *-----------------------
        DATA DIVISION.
        FILE SECTION.
 
-       FD ENTRADA.
-       01 REG-ENTRADA.
+       FD SALIDA1.
+       01 REG-SALIDA1.
            05 REG-CLAVE            PIC X(2).
            05 REG-NOMBRE           PIC X(30).
       *-----------------------
        WORKING-STORAGE SECTION.
-       01 WSS-FS-ENTRADA           PIC X(02).
-           88 WSS-FS-ENTRADA-OK    VALUE '00'.
-           88 WSS-FS-ENTRADA-EOF   VALUE '10'.
+       01 WSS-FS-SALIDA           PIC X(02).
+           88 WSS-FS-SALIDA-OK    VALUE '00'.
+           88 WSS-FS-SALIDA-EOF   VALUE '10'.
 
-       01 WSV-CONT-ENTRADA     PIC S9(4) COMP.
+       01 WSV-CONT-ENTRADA         PIC S9(4) COMP.
+
+       01 WSV-SEGUIR               PIC X(02).
+
+       01 WSV-ENTRADA.
+           05 WSV-CLAVE            PIC X(02).
+           05 WSV-NOMBRE           PIC X(30).
+
+       77 I                        PIC 9(02).
       *-----------------------
        PROCEDURE DIVISION.
        0000-PROCESO.
            PERFORM 10000-ABRIR-ARCHIVO
-           PERFORM 15000-LEER-Y-CARGAR UNTIL WSS-FS-ENTRADA-EOF
+           PERFORM INGRESO-DE-DATOS
            PERFORM 30000-CERRAR-ARCHIVO
            PERFORM INFORMAR-CANTIDAD-REGISTROS-LEIDOS
            PERFORM FIN-DEL-PROGRAMA.
            
+       INGRESO-DE-DATOS.
+           PERFORM UNTIL WSV-SEGUIR = '99'
+               DISPLAY "INGRESAR CLAVE: "
+               ACCEPT WSV-CLAVE
+               DISPLAY "INGRESAR NOMBRE: "
+               ACCEPT WSV-NOMBRE
+               PERFORM 20000-ESCRITURA
+               DISPLAY "DESEA SEGUIR? "
+               ACCEPT WSV-SEGUIR
+           END-PERFORM.
+
        10000-ABRIR-ARCHIVO.
            MOVE 0 TO WSV-CONT-ENTRADA
-           OPEN INPUT ENTRADA
-           IF NOT WSS-FS-ENTRADA-OK
-               DISPLAY 'ERROR DE ARCHIVO DE ENTRADA'
-               DISPLAY 'FILE STATUS' WSS-FS-ENTRADA
+           OPEN OUTPUT SALIDA1
+           IF NOT WSS-FS-SALIDA-OK
+               DISPLAY 'ERROR DE ARCHIVO DE SALIDA'
+               DISPLAY 'FILE STATUS' WSS-FS-SALIDA
                PERFORM FIN-DEL-PROGRAMA
            END-IF.
        
        30000-CERRAR-ARCHIVO.
-           CLOSE ENTRADA
-           IF NOT WSS-FS-ENTRADA-OK
-               DISPLAY 'ERROR DE ARCHIVO DE ENTRADA'
-               DISPLAY 'FILE STATUS' WSS-FS-ENTRADA
+           CLOSE SALIDA1
+           IF NOT WSS-FS-SALIDA-OK
+               DISPLAY 'ERROR DE ARCHIVO DE SALIDA'
+               DISPLAY 'FILE STATUS' WSS-FS-SALIDA
            END-IF.
 
-       15000-LEER-Y-CARGAR.
-           READ ENTRADA
-           IF WSS-FS-ENTRADA-OK
-               DISPLAY REG-ENTRADA
+       20000-ESCRITURA.
+           PERFORM 15000-LEER-Y-ESCRIBIR.
+
+       15000-LEER-Y-ESCRIBIR.
+           WRITE REG-SALIDA1 FROM WSV-ENTRADA.
+           IF WSS-FS-SALIDA-OK
                ADD 1 TO WSV-CONT-ENTRADA
            END-IF.
 
