@@ -36,7 +36,7 @@
            88 WSS-FS-SALIDA-OK    VALUE '00'.
            88 WSS-FS-SALIDA-EOF   VALUE '10'.
 
-       01 WSV-CONT-ENTRADA         PIC S9(4) COMP.
+       01 WSV-CONT-SALIDA         PIC S9(4) COMP.
 
        01 WSV-SEGUIR               PIC X(02).
 
@@ -66,7 +66,7 @@
            END-PERFORM.
 
        10000-ABRIR-ARCHIVO.
-           MOVE 0 TO WSV-CONT-ENTRADA
+           MOVE 0 TO WSV-CONT-SALIDA
            OPEN OUTPUT SALIDA1
            IF NOT WSS-FS-SALIDA-OK
                DISPLAY 'ERROR DE ARCHIVO DE SALIDA'
@@ -87,14 +87,14 @@
        15000-LEER-Y-ESCRIBIR.
            WRITE REG-SALIDA1 FROM WSV-ENTRADA.
            IF WSS-FS-SALIDA-OK
-               ADD 1 TO WSV-CONT-ENTRADA
+               ADD 1 TO WSV-CONT-SALIDA
            END-IF.
 
        INFORMAR-CANTIDAD-REGISTROS-LEIDOS.
-           IF WSV-CONT-ENTRADA = 0
+           IF WSV-CONT-SALIDA = 0
                DISPLAY "ARCHIVO VACIO"
            ELSE    
-               DISPLAY "CANTIDAD DE ARCHIVOS LEIDOS: " WSV-CONT-ENTRADA
+               DISPLAY "CANTIDAD DE ARCHIVOS ESCRITOS: "WSV-CONT-SALIDA
            END-IF.
 
        FIN-DEL-PROGRAMA.
