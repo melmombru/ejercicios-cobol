@@ -22,7 +22,7 @@
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
 
-       SELECT ENTRADA          ASSIGN TO DISK 'SERVICIO.DAT'
+       SELECT ENTRADA          ASSIGN TO DISK 'CUENTA.DAT'
                                ORGANIZATION IS LINE SEQUENTIAL
                                FILE STATUS IS WSS-FS-ENTRADA.
                        
@@ -32,11 +32,9 @@
 
        FD ENTRADA.
        01 REG-ENTRADA.
-           05 REG-COD-SERVICIO     PIC X(03).
-           05 REG-NRO-CUENTA       PIC 9(08).
-           05 REG-DESCRIP-SERV     PIC X(30).
-           05 REG-PERIODO-FACT     PIC X(06).
-           05 REG-MONTO-FACTURA    PIC S9(05)V9(02).
+           05 REG-NRO-CUENTA       PIC X(08).
+           05 REG-COD-CLIENTE      PIC 9(08).
+           05 REG-MONTO-CUENTA     PIC S9(15)V9(02).
       *-----------------------
        WORKING-STORAGE SECTION.
        01 WSS-FS-ENTRADA           PIC X(02).
@@ -49,53 +47,38 @@
 
        01 WSV-ENTRADA.
            05 FILLER               PIC X     VALUE ALL '|'.
-           05 WSV-COD-SERVICIO     PIC X(05).
-           05 FILLER               PIC X     VALUE ALL '|'.
            05 WSV-NRO-CUENTA.
-               10 WSV-NRO-CUENTA-1 PIC 9(02).
+               10 WSV-NRO-CUENTA-1 PIC X(02).
                10 FILLER           PIC X     VALUE ALL '-'.
-               10 WSV-NRO-CUENTA-2 PIC 9(05).
+               10 WSV-NRO-CUENTA-2 PIC X(05).
                10 FILLER           PIC X     VALUE ALL '-'.
-               10 WSV-NRO-CUENTA-3 PIC 9(01).
+               10 WSV-NRO-CUENTA-3 PIC X(01).
            05 FILLER               PIC X     VALUE ALL '|'.
-           05 WSV-DESCRIP-SERV     PIC X(40).
+           05 WSV-COD-CLIENTE     PIC 9(08).
            05 FILLER               PIC X     VALUE ALL '|'.
-           05 WSV-PERIODO-FACT.
-               10 WSV-MES          PIC 9(02).
-               10 FILLER           PIC X     VALUE ALL '/'.
-               10 WSV-ANIO         PIC 9(04).
-           05 FILLER               PIC X     VALUE ALL '|'.
-           05 WSV-MONTO-FACTURA.
+           05 WSV-MONTO-CUENTA.
                10 FILLER           PIC X     VALUE ALL '+'.
-               10 WSV-ENTERO       PIC 9(05).
+               10 WSV-ENTERO       PIC 9(15).
                10 FILLER           PIC X     VALUE ALL ','.
                10 WSV-DECIMAL      PIC 9(02).
            05 FILLER               PIC X     VALUE ALL '|'.
 
        01  TITULO0.
            05 FILLER           PIC X VALUE "*".
-           05 FILLER           PIC X(5) VALUE ALL "-".
-           05 FILLER           PIC X VALUE "*".
            05 FILLER           PIC X(10) VALUE ALL "-".
            05 FILLER           PIC X VALUE "*".
-           05 FILLER           PIC X(40) VALUE ALL "-".
+           05 FILLER           PIC X(8) VALUE ALL "-".
            05 FILLER           PIC X VALUE "*".
-           05 FILLER           PIC X(7) VALUE ALL "-".
-           05 FILLER           PIC X VALUE "*".
-           05 FILLER           PIC X(9) VALUE ALL "-".
+           05 FILLER           PIC X(19) VALUE ALL "-".
            05 FILLER           PIC X VALUE "*".
        
        01  TITULO1.
            05 FILLER           PIC X     VALUE ALL '|'.
-           05 SERVICIO         PIC X(05) VALUE "SERV.".
+           05 SERVICIO         PIC X(10) VALUE "NRO.CUENTA".
            05 FILLER           PIC X     VALUE ALL '|'.
-           05 CUENTA           PIC X(10) VALUE " CUENTA".
+           05 CUENTA           PIC X(8) VALUE "COD.CLI.".
            05 FILLER           PIC X     VALUE ALL '|'.
-           05 DESCRIPCION      PIC X(40) VALUE "  DESCRIPCION      ".
-           05 FILLER           PIC X     VALUE ALL '|'.
-           05 PERIODO          PIC X(7) VALUE "PERIODO".
-           05 FILLER           PIC X     VALUE ALL '|'.
-           05 MONTO            PIC X(9) VALUE " MONTO ".
+           05 DESCRIPCION      PIC X(19) VALUE " DISPONIBLE CUENTA".
            05 FILLER           PIC X     VALUE ALL '|'.
 
       *-----------------------
@@ -143,15 +126,12 @@
            END-IF.
        
        25500-ESCRIBIR-SERVICIO.
-           MOVE REG-COD-SERVICIO  TO WSV-COD-SERVICIO
            MOVE REG-NRO-CUENTA(1:2)   TO WSV-NRO-CUENTA-1
            MOVE REG-NRO-CUENTA(3:5)   TO WSV-NRO-CUENTA-2
            MOVE REG-NRO-CUENTA(8:1)   TO WSV-NRO-CUENTA-3
-           MOVE REG-DESCRIP-SERV  TO WSV-DESCRIP-SERV
-           MOVE REG-PERIODO-FACT(5:2)  TO WSV-MES
-           MOVE REG-PERIODO-FACT(1:4)  TO WSV-ANIO
-           MOVE REG-MONTO-FACTURA(1:5) TO WSV-ENTERO
-           MOVE REG-MONTO-FACTURA(6:2) TO WSV-DECIMAL
+           MOVE REG-COD-CLIENTE    TO WSV-COD-CLIENTE
+           MOVE REG-MONTO-CUENTA(1:15) TO WSV-ENTERO
+           MOVE REG-MONTO-CUENTA(16:2) TO WSV-DECIMAL
            DISPLAY WSV-ENTRADA.
            
        INFORMAR-CANTIDAD-REGISTROS-LEIDOS.
