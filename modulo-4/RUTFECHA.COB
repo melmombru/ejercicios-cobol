@@ -71,7 +71,8 @@
            MOVE DIA TO DIA-T.
            MOVE MES TO MES-T.
            MOVE ANIO TO ANIO-T
-           MOVE FECHA-TEXTUAL TO WSV-FECHA-TEXTUAL.
+           MOVE FECHA-TEXTUAL TO WSV-FECHA-TEXTUAL
+           SET WSS-RETORNO-OK TO TRUE.
        
        VALIDAR-DIA.
            IF DIA >= 1 AND DIA <= 31
@@ -116,6 +117,7 @@
        VALIDAR-CANTIDAD-INTENTOS.
            IF INTENTOS > 6 
            DISPLAY 'INTENTOS MAYOR A 6'
+           SET WSS-RETORNO-ERROR TO TRUE
            PERFORM FIN-DE-RUTINA
            END-IF.
 

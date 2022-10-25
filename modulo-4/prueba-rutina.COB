@@ -42,8 +42,10 @@
            CALL WSC-RUTINA USING REGISTRO-LLAMADO.
        
        0002-MOSTRAR-RETORNO.
-           DISPLAY "regreso de la rutina, la fecha es: "
-           WSV-FECHA-TEXTUAL.
+           IF WSS-RETORNO-OK
+               DISPLAY "regreso de la rutina, la fecha es: "
+               WSV-FECHA-TEXTUAL
+           END-IF.
 
        FIN-DEL-PROGRAMA.
            STOP RUN.
