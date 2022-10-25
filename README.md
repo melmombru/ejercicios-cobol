@@ -23,4 +23,5 @@ Series:
 ## Modulo 3 - Archivos
 
 Series:
-* Serie 6 
+ * Serie 6 (Manejo de archivos)
+ * Serie 7 (Apareo)
