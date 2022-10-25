@@ -25,9 +25,9 @@
 
        01  FECHA-TEXTUAL.
            05 DIA-T          PIC 9(2).
-           05 FILLER       PIC X VALUE "/".
+           05 FILLER       PIC X VALUE "-".
            05 MES-T          PIC 9(2).
-           05 FILLER       PIC X VALUE "/".
+           05 FILLER       PIC X VALUE "-".
            05 ANIO-T         PIC 9(4).
 
        01  WSS-DIA         PIC X(2).
@@ -40,13 +40,15 @@
                88 ANIO-OK      VALUE 'OK'.
                88 ANIO-INIC    VALUE 'IN'.
 
-       77  INTENTOS        PIC 9(1) VALUE 0.
+       77  INTENTOS        PIC 9(1).
 
        LINKAGE SECTION.
        COPY REG-LLAMADO.
       *-----------------------
        PROCEDURE DIVISION USING REGISTRO-LLAMADO.
        00000-CONTROL.
+           MOVE 0 TO INTENTOS
+           SET WSS-RETORNO-ERROR TO TRUE
            PERFORM INGRESO-DE-FECHA
            PERFORM MUESTRA-FECHA
            PERFORM FIN-DE-RUTINA.
