@@ -45,6 +45,8 @@
            IF WSS-RETORNO-OK
                DISPLAY "regreso de la rutina, la fecha es: "
                WSV-FECHA-TEXTUAL
+           ELSE 
+               DISPLAY "error al ingresar la fecha"
            END-IF.
 
        FIN-DEL-PROGRAMA.
