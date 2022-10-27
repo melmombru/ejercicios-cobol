@@ -94,12 +94,10 @@
                        MOVE WSV-DATO(K + 1) TO WSV-DATO-2
                        COMPUTE WSV-RESULTADO = 
                        WSV-RESULTADO + WSV-DATO-2
-                       ADD 1 TO WSV-CONTADOR   
                    WHEN "-"
                        MOVE WSV-DATO(K + 1) TO WSV-DATO-2
                        COMPUTE WSV-RESULTADO = 
                        WSV-RESULTADO - WSV-DATO-2 
-                       ADD 1 TO WSV-CONTADOR   
                    WHEN OTHER
                        CONTINUE
                    END-EVALUATE
