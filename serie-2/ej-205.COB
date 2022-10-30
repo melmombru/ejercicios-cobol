@@ -1,11 +1,11 @@
       ******************************************************************
       * Author: Melanie
       * Date: 2022 10
-      * DESCRIPCION: Ejercicio
+      * DESCRIPCION: Ejercicio funcion matematica
       ******************************************************************
        IDENTIFICATION DIVISION.
       *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-       PROGRAM-ID. EJES2104.
+       PROGRAM-ID. EJES8012.
        ENVIRONMENT DIVISION.
       *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
        CONFIGURATION SECTION.
@@ -18,66 +18,82 @@
 
       *-----------------------
        WORKING-STORAGE SECTION.
-       01  WSV-FUNCION-MATEMATICA PIC X(35).
+       01  WSV-FUNCION             PIC X(30).
+
+       01  WSV-FORMATO-OPERACION.
+           05 WSV-DATO             PIC X(05) OCCURS 5 TIMES 
+                                               INDEXED BY K.
+
+       01  WSV-DATOS-NUMERICOS.
+           05 WSV-DATO-1           PIC 9(05).
+           05 WSV-DATO-2           PIC 9(05).
        
-       01 WS-CNT PIC 99 VALUE 0.
-       01 WSV-FUNCION.
-           05 WSV-OPERANDO 
-                   OCCURS 1 TO 20 TIMES DEPENDING ON WS-CNT PIC X.
+       01  WSV-INDICES.         
+           05 I                    PIC 9(02).
+           05 J                    PIC 9(02).
 
-       01  WSV-FUNCION.
-           05 WSV-NUMERO-1     PIC 9(10).
-           05 FILLER           PIC X(01).
-           05 WSV-OPERADOR     PIC X(01).
-           05 FILLER           PIC X(01).
-           05 WSV-NUMERO-2     PIC 9(04).
-
-       77  WSV-I               PIC 9(02).
-       77  WSV-J               PIC 9(02) VALUE 1.
-       77  WSV-RESULTADO       PIC 9(8)V9(4).
+       77  WSV-RESULTADO           PIC S9(05) VALUE 0.
+       01  WSV-CONTADOR            PIC 9(01).
+           88 WSS-PRIMER-CONTADOR      VALUE 1.
+           88 WSS-SEGUNDO-CONTADOR     VALUE 2.
       *-----------------------
        PROCEDURE DIVISION.
        00000-CONTROL.
            PERFORM INGRESO-DE-DATOS
+           PERFORM SEPARAR-FUNCION
            PERFORM REALIZAR-OPERACION
-           PERFORM MOSTRAR-RESULTADO.
+           PERFORM MOSTRAR-RESULTADOS
            PERFORM FIN-DEL-PROGRAMA.
 
        INGRESO-DE-DATOS.
-           DISPLAY "INGRESE FUNCION MATEMATICA:"
-           ACCEPT WSV-FUNCION-MATEMATICA
-           PERFORM ELIMINAR-ESPACIOS.
+           DISPLAY "INGRESE FUNCION: " 
+           ACCEPT WSV-FUNCION.
 
-       ELIMINAR-ESPACIOS.
-           PERFORM VARYING WSV-I FROM 1 BY 1 UNTIL WSV-I > 35
-               IF WSV-FUNCION-MATEMATICA(WSV-I:1) = " " THEN
-                   CONTINUE
+      *BUSCAR LA PALABRA EN LA FRASE
+       SEPARAR-FUNCION.
+           MOVE 1 TO J
+           MOVE 1 TO K
+           PERFORM VARYING I FROM 1 BY 1 UNTIL I > 30 
+               IF WSV-FUNCION(I:1) = " " THEN
+                   MOVE WSV-FUNCION(J:I - J) TO WSV-DATO(K)
+                   ADD 1 TO K
+                   MOVE I TO J
+                   ADD 1 TO J
                ELSE
-                   MOVE WSV-FUNCION-MATEMATICA(WSV-I:1) TO 
-                   WSV-OPERANDO(WSV-J)
-                   ADD 1 TO WSV-J
-                   ADD 1 TO WS-CNT
+                   CONTINUE
                END-IF
-           END-PERFORM
-           DISPLAY WSV-FUNCION.
-       
-       REALIZAR-OPERACION.
-           EVALUATE WSV-OPERADOR
-           WHEN "+"
-               COMPUTE WSV-RESULTADO = WSV-NUMERO-1 + WSV-NUMERO-2   
-           WHEN "-"
-               COMPUTE WSV-RESULTADO = WSV-NUMERO-1 - WSV-NUMERO-2   
-           WHEN "*"
-               COMPUTE WSV-RESULTADO = WSV-NUMERO-1 * WSV-NUMERO-2   
-           WHEN "/"
-               COMPUTE WSV-RESULTADO = WSV-NUMERO-1 / WSV-NUMERO-2
-           WHEN OTHER
-               DISPLAY "OPERADOR INVALIDO"
-           END-EVALUATE.
+           END-PERFORM.
 
-       MOSTRAR-RESULTADO.
-           DISPLAY "RESULTADO: " WSV-RESULTADO.
+      *MUESTRA POR PANTALLA EL RESULTADO      
+       MOSTRAR-RESULTADOS.
+           DISPLAY "RESULTADO " WSV-RESULTADO.
+           
+        REALIZAR-OPERACION.
+           PERFORM VARYING K FROM 1 BY 1 UNTIL K > 5
+               EVALUATE WSV-DATO(K)
+               WHEN "+"
+                   MOVE WSV-DATO(K - 1) TO WSV-DATO-1
+                   DISPLAY WSV-DATO-1
+                   MOVE WSV-DATO(K + 1) TO WSV-DATO-2
+                   COMPUTE WSV-RESULTADO = WSV-DATO-1 + WSV-DATO-2 
+               WHEN "-"
+                   MOVE WSV-DATO(K - 1) TO WSV-DATO-1
+                   MOVE WSV-DATO(K + 1) TO WSV-DATO-2
+                   COMPUTE WSV-RESULTADO = WSV-DATO-1 - WSV-DATO-2 
+               WHEN "*"
+                   MOVE WSV-DATO(K - 1) TO WSV-DATO-1
+                   DISPLAY WSV-DATO-1
+                   MOVE WSV-DATO(K + 1) TO WSV-DATO-2
+                   COMPUTE WSV-RESULTADO = WSV-DATO-1 * WSV-DATO-2 
+               WHEN "/"
+                   MOVE WSV-DATO(K - 1) TO WSV-DATO-1
+                   MOVE WSV-DATO(K + 1) TO WSV-DATO-2
+                   COMPUTE WSV-RESULTADO = WSV-DATO-1 / WSV-DATO-2 
+               WHEN OTHER
+                   CONTINUE
+               END-EVALUATE
+           END-PERFORM.
 
        FIN-DEL-PROGRAMA.
            STOP RUN.
-           
+         
