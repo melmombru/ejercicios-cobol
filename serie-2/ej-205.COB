@@ -21,7 +21,7 @@
        01  WSV-FUNCION             PIC X(30).
 
        01  WSV-FORMATO-OPERACION.
-           05 WSV-DATO             PIC X(05) OCCURS 5 TIMES 
+           05 WSV-DATO             PIC X(05) OCCURS 3 TIMES 
                                                INDEXED BY K.
 
        01  WSV-DATOS-NUMERICOS.
@@ -54,6 +54,7 @@
            MOVE 1 TO J
            MOVE 1 TO K
            PERFORM VARYING I FROM 1 BY 1 UNTIL I > 30 
+           OR WSV-FUNCION(I:1) = "="
                IF WSV-FUNCION(I:1) = " " THEN
                    MOVE WSV-FUNCION(J:I - J) TO WSV-DATO(K)
                    ADD 1 TO K
@@ -69,7 +70,7 @@
            DISPLAY "RESULTADO " WSV-RESULTADO.
            
         REALIZAR-OPERACION.
-           PERFORM VARYING K FROM 1 BY 1 UNTIL K > 5
+           PERFORM VARYING K FROM 1 BY 1 UNTIL K > 3
                EVALUATE WSV-DATO(K)
                WHEN "+"
                    MOVE WSV-DATO(K - 1) TO WSV-DATO-1
