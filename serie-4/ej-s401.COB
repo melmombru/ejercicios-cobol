@@ -1,7 +1,7 @@
       ******************************************************************
       * Author: Melanie
       * Date: 2022 10
-      * DESCRIPCION: ej importes totalizay y lo muestra
+      * DESCRIPCION: ej importes totalizar y lo muestra eliminando ceros
 
       ******************************************************************
        IDENTIFICATION DIVISION.
