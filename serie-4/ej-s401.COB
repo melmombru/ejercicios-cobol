@@ -26,13 +26,15 @@
                
        01 WSV-PAGO-TOTAL       PIC 9(06)V9(02).
 
+       77 WSV-PAGO-SEMESTRE    PIC Z(06)9.99.
+
        01 WSV-SEGUIR           PIC X(01).
 
        01 WSV-IMPORTE.
-           05 WSV-TITULO       PIC X(50) VALUE ALL "*".
+           05 WSV-TITULO       PIC X(47) VALUE ALL "*".
            05 WSV-PAGO         PIC X(33) VALUE 
                                "PAGOS TOTALES ULTIMO SEMESTRE ".
-           05 WSV-FIN          PIC X(50) VALUE ALL "*".
+           05 WSV-FIN          PIC X(47) VALUE ALL "*".
 
       *-----------------------
        PROCEDURE DIVISION.
@@ -52,12 +54,21 @@
            PERFORM VARYING I FROM 1 BY 1 UNTIL I > 6
                ADD WST-IMPORTE(I) TO WSV-PAGO-TOTAL
            END-PERFORM.
+      *    PERFORM ELIMINAR-CEROS.
+           MOVE WSV-PAGO-TOTAL TO WSV-PAGO-SEMESTRE.
 
        INFORMAR-PAGO.
            DISPLAY WSV-TITULO
            DISPLAY WSV-PAGO WITH NO ADVANCING
-           DISPLAY WSV-PAGO-TOTAL
+           DISPLAY WSV-PAGO-SEMESTRE
            DISPLAY WSV-FIN.
+       
+      *ELIMINAR-CEROS.
+      *    MOVE 1 TO I
+      *    PERFORM UNTIL I > 8 OR WSV-PAGO-TOTAL(I:1) NOT = 0
+      *        ADD 1 TO I
+      *    END-PERFORM
+      *    DISPLAY .
 
        FIN-DEL-PROGRAMA.
            STOP RUN.
