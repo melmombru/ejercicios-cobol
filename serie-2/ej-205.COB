@@ -74,7 +74,6 @@
                EVALUATE WSV-DATO(K)
                WHEN "+"
                    MOVE WSV-DATO(K - 1) TO WSV-DATO-1
-                   DISPLAY WSV-DATO-1
                    MOVE WSV-DATO(K + 1) TO WSV-DATO-2
                    COMPUTE WSV-RESULTADO = WSV-DATO-1 + WSV-DATO-2 
                WHEN "-"
@@ -83,7 +82,6 @@
                    COMPUTE WSV-RESULTADO = WSV-DATO-1 - WSV-DATO-2 
                WHEN "*"
                    MOVE WSV-DATO(K - 1) TO WSV-DATO-1
-                   DISPLAY WSV-DATO-1
                    MOVE WSV-DATO(K + 1) TO WSV-DATO-2
                    COMPUTE WSV-RESULTADO = WSV-DATO-1 * WSV-DATO-2 
                WHEN "/"
