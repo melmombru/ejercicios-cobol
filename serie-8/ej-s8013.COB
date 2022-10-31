@@ -1,7 +1,7 @@
       ******************************************************************
       * Author: Melanie
       * Date: 2022 10
-      * DESCRIPCION: Ejercicio funcion matematica
+      * DESCRIPCION: Ejercicio funcion matematica con *, / y ()
       ******************************************************************
        IDENTIFICATION DIVISION.
       *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
@@ -76,7 +76,6 @@
                    EVALUATE WSV-DATO(K)
                    WHEN "+"
                        MOVE WSV-DATO(K - 1) TO WSV-DATO-1
-                       DISPLAY WSV-DATO-1
                        MOVE WSV-DATO(K + 1) TO WSV-DATO-2
                        COMPUTE WSV-RESULTADO = WSV-DATO-1 + WSV-DATO-2 
                        SET  WSS-SEGUNDO-CONTADOR TO TRUE
