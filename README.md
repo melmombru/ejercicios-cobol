@@ -27,3 +27,8 @@ Series:
  * Serie 7 (Apareo)
 
 ## Modulo 4 - Rutinas y copy's
+
+Series:
+ * Serie 8 (Ejercicios integradores)
+
+ ## Modulo 5 - Buenas Practicas
