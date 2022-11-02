@@ -24,7 +24,7 @@
 
        01 FECHA-TEXTUAL.
            05 MES-T                PIC 9(2).
-           05 FILLER               PIC X(01) VALUE "-".
+           05 FILLER               PIC X(01) VALUE "/".
            05 ANIO-T               PIC 9(4).
 
        01 WSS-MES                  PIC X(2).
