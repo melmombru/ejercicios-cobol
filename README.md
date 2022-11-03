@@ -109,4 +109,6 @@ Mover campo Alfanumérico a campo numérico (Uso correcto de REDEFINES)
 
 * DISPLAY en programa productivo 
 
-* SORT interno 
+* SORT interno (hacerlo afuera del programa con un nuevo archivo y usar ese)
+
+* No se deben dejar programas que se necesite que el programador este cuando se ejecuta (progamas dependientes del programador que los hizo)
