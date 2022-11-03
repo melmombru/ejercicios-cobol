@@ -59,12 +59,14 @@
            END-EVALUATE
            PERFORM 30000-FIN-DE-RUTINA.
            
+      *LEE ARCHIVO Y VA CARGANDO LOS REGISTROS A LA TABLA
        10000-CARGAR-TABLA.
            PERFORM 11000-ABRIR-ARCHIVO-INPUT
            SET IND TO 1
            PERFORM 12000-LEER-Y-CARGAR UNTIL WSS-FS-PAIS-EOF
            PERFORM 13000-CERRAR-ARCHIVO.  
 
+      *ABRE EL ARCHIVO EN INPUT PARA LEER
        11000-ABRIR-ARCHIVO-INPUT.
            MOVE 0 TO WSV-CONT-PAIS
            OPEN INPUT PAIS
@@ -77,6 +79,7 @@
                PERFORM 30000-FIN-DE-RUTINA
            END-IF.  
 
+      *LEE EL REGISTRO Y LO CARGA EN LA TABLA
        12000-LEER-Y-CARGAR.
            READ PAIS
            IF WSS-FS-PAIS-OK
@@ -85,6 +88,7 @@
                ADD 1 TO IND
            END-IF.
 
+      *CIERRA EL ARCHIVO
        13000-CERRAR-ARCHIVO.  
            CLOSE PAIS
            IF WSS-FS-PAIS-OK
@@ -95,6 +99,7 @@
                TO WSV-ST-TEXTO-PAIS
            END-IF.
 
+      *BUSCA EL PAIS POR SU NUMERO, VERIFICANDO QUE SEA VALIDO
        20000-BUSCAR-PAIS.
            EVALUATE TRUE
            WHEN REG-NRO-PAIS-E >= 0 AND REG-NRO-PAIS-E <= 999
@@ -104,6 +109,7 @@
                SET WSS-PAIS-ERROR TO TRUE
            END-EVALUATE.
 
+      *BUSCA NRO DE PAIS Y MUEVE SU DESCRIPCION 
        21000-BUSQUEDA.
            SET WSS-BUSQUEDA-NO TO TRUE
            SET IND TO 1
@@ -120,6 +126,7 @@
                SET WSS-PAIS-ERROR TO TRUE
            END-IF.
 
+      *DA FIN A LA RUTINA
        30000-FIN-DE-RUTINA.
            GOBACK.
            
