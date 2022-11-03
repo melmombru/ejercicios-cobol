@@ -68,7 +68,10 @@ archivo que fue abierto
 * Párrafos únicos para apertura, cierre, lectura y escritura de datos,
 
 * Un único STOP RUN / GOBACK / EXEC CICS RETURN.
-    
+
+* Info concreta ante cualquier error
+
+* Autonomia del sistema
 
 #### ES MEJOR
 * Comentar los párrafos 
@@ -97,6 +100,8 @@ archivo que fue abierto
 
 * Verificar longitud de los campos que se mueven entre si (evitar
 trucamientos)
+
+* Inicializar variables, ya que pueden tener contenido basura
 
 #### PROHIBIDO
 * Tener valores en duro en el código, no uso de hardcodes 
