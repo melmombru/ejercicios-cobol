@@ -120,4 +120,24 @@ Mover campo Alfanumérico a campo numérico (Uso correcto de REDEFINES)
 
 ## Modulo 6 - JCL
 
+* Seccion JOB
+* Seccion EXEC
+    * IDCAMS = prog de utilitario de archivos, parametrizable por archivos (SYSIN DD * hasta /* = a archivo de entrada) .
+    * REPRO = archivo de entrada INFILE, pasar los datos de un archivo de entrada a otro de salida OUTFILE, con COUNT(X) permite grabar los primeros X registros, SKIP(X) se saltea los primeros X registros
+    * DCB = 
+* Seccion DD
+    * SYSOUT = prog tiene salida display
+    * UNIT = tipo de disco
+    * VOL = volumen en el residera el nuevo fichero(nombre)    
+    * DISP=(e del archivo al iniciar,que pasa cuando termina bien, que pasa cuando termina mal)
+        1. e° del archivo al iniciar
+            * NEW = crea el archivo sino existe 
+            * OLD = permite que se abra y lo pise
+            * SHR = input, permite compartirdo
+            * MOD = output extend, agreaga datos al final del archivo
+        2. que pasa cuando termina bien
+        3. que pasa cuando termina mal
+            * CATLG = calogar
+            * DELETE = lo borra
+            * KEEP = guarda el fichero
 
