@@ -141,3 +141,4 @@ Mover campo Alfanumérico a campo numérico (Uso correcto de REDEFINES)
             * DELETE = lo borra
             * KEEP = guarda el fichero
 
+* LISTCAT ENTRIES = saber caracteristicas del archivo, sino existe devuelve 4
