@@ -20,7 +20,7 @@
 //
 
 
-//*Ej 2
+//*Ej 2 EJERCICIO ALUMNOS-NOTAS
 //EJALUM-NOTAS JOB
 //  TYPERUN=SCAN,
 //  RESTART=PASO03
@@ -125,7 +125,7 @@
 //
 
 
-//*Ej 6
+//*Ej 6 ESCRIBE ARCHIVO BORRADO CON UN REGISTRO
 //JOB200DA JOB
 //PASODA01      EXEC PGM=IEFBR14
 //SYSPRINT      DD   SYSOUT=*
@@ -153,7 +153,7 @@
 /*
 //
 
-//*Ej 7
+//*Ej 7 RENOMBRAR ARCHIVO
 //JOB250RE JOB       
 //PASORENO        EXEC PGM=IDCAMS 
 //SYSPRINT      DD   SYSOUT=*
@@ -164,7 +164,7 @@
 //
 
 
-//*Ej 8
+//*Ej 8 
 //JOB260IN JOB       
 //PASOINI       EXEC PGM=IDCAMS
 //FIN01         DD   DUMMY
@@ -176,7 +176,7 @@
 /*
 //
 
-//*Ej 9
+//*Ej 9 VERIFICAR SI EXISTE UN ARCHIVO
 //JOB27001 JOB       
 //PASOVER       EXEC PGM=IDCAMS
 //SYSPRINT      DD   SYSOUT=*
@@ -200,5 +200,67 @@
 //                   DISP=(NEW,CATLOG,DELETE),
 //                   DCB=(RECFM=FB,LRECL=567,BLKSIZE=7940),
 //                   UNIT=SYSDA,SPACE=(CYL,(1,1),RLSE) 
+//ENDIF
+//
+
+
+//*Ej 10 COMPARACION DE ARCHIVOS E IMPRESION DE MENSAJE
+//JOB28001 JOB       
+//PASOCOMP      EXEC PGM=IEBCOMPR 
+//SYSPRINT      DD   SYSOUT=*
+//SYSOUT        DD   SYSOUT=*
+//SYSUT1        DD   DSN=ARCHIVO.PARA.DEPOSITOS.DE.LA.S01,DISP=SHR
+//SYSUT2        DD   DSN=ARCHIVO.PARA.DEPOSITOS.DE.LA.S02,DISP=SHR
+//SYSIN         DD   DUMMY
+/*
+//IF PASOCOMP.RC EQ 0 THEN
+//PASOSI       EXEC PGM=IDCAMS 
+//ENTRADA         DD    *
+"Son iguales"
+/*
+//SALIDA        DD   SYSOUT=*
+//SYSIN         DD   *
+        REPRO INFILE(ENTRADA)-
+              OUTFILE(SALIDA)  
+/*
+//ELSE
+//PASONO       EXEC PGM=IEFBR14
+//ENTRADA         DD    *
+"Son distintos"
+/*
+//SALIDA        DD   SYSOUT=*
+//SYSIN         DD   *
+        REPRO INFILE(ENTRADA)-
+              OUTFILE(SALIDA)  
+/*
+//ENDIF
+//
+
+//*11 Ejercicio JCL para ver si un archivo esta vacio
+//JOB28002 JOB       
+//PASOVER       EXEC PGM=IDCAMS 
+//SYSPRINT      DD   SYSOUT=*
+//SYSOUT        DD   SYSOUT=*
+//SYSUT1        DD   DSN=ARCHIVO.PARA.DEPOSITOS.DE.LA.S01,DISP=SHR
+//SYSUT2        DD   DUMMY
+/*
+//SYSIN         DD   *
+        REPRO INFILE(SYSUT1)-
+              OUTFILE(SYSUT2) -
+              COUNT(1)
+/*
+//IF PASOVER.RC EQ 0 THEN
+//PASOSI        EXEC PGM=COBOL001 
+//ARCH01        DD   DSN=ARCHIVO.PARA.DEPOSITOS.DE.LA.S01,DISP=SHR
+//ELSE
+//PASONO       EXEC PGM=IEFBR14
+//ENTRADA         DD    *
+'archivo sin datos' 
+/*
+//SALIDA        DD   SYSOUT=*
+//SYSIN         DD   *
+        REPRO INFILE(ENTRADA)-
+              OUTFILE(SALIDA)  
+/*
 //ENDIF
 //
